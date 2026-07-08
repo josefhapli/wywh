@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preview | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="app-shell" data-page="create">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a class="active" href="create.html">Create</a>
+          <a href="orders.html">Orders</a>
+          <a href="login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <div class="container">
+        <div class="page-heading">
+          <div>
+            <h1>Preview postcard</h1>
+            <p>Review both sides before checkout.</p>
+          </div>
+          <a class="btn secondary" href="message.html">Edit</a>
+        </div>
+        <div class="workspace">
+          <section class="postcard-grid">
+            <article class="postcard front"><img data-preview-image alt="Front of postcard"></article>
+            <article class="postcard back">
+              <div class="message-text" data-preview-message></div>
+              <div class="postcard-divider"></div>
+              <div>
+                <div class="stamp"></div>
+                <div class="address-lines">
+                  <strong data-preview-recipient></strong>
+                  <div class="address-text" data-preview-address></div>
+                  <div class="address-line"></div>
+                  <div class="address-line"></div>
+                </div>
+              </div>
+            </article>
+          </section>
+          <aside class="summary">
+            <h2>Order Summary</h2>
+            <div class="summary-row"><span>1 Postcard</span><strong>$2.99</strong></div>
+            <div class="summary-row"><span>Shipping</span><strong>Included</strong></div>
+            <div class="summary-row total"><span>Total</span><span>$2.99</span></div>
+            <a class="btn primary full" href="checkout.html">Checkout</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a data-nav="home" href="index.html">Home</a>
+      <a data-nav="create" href="create.html">Create</a>
+      <a data-nav="orders" href="orders.html">Orders</a>
+      <a data-nav="me" href="login.html">Me</a>
+    </nav>
+    <script type="module" src="js/preview.js"></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="app-shell" data-page="create">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a class="active" href="create.html">Create</a>
+          <a href="orders.html">Orders</a>
+          <a href="login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <div class="container">
+        <div class="page-heading">
+          <div>
+            <h1>Address and message</h1>
+            <p>Make it feel like a real postcard: short, personal, and easy to send.</p>
+          </div>
+        </div>
+        <div class="workspace">
+          <form id="messageForm" class="form-panel field-grid">
+            <div class="field full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" maxlength="500" placeholder="Wish you were here..."></textarea>
+            </div>
+            <div class="field full">
+              <label for="recipient">Recipient Name</label>
+              <input id="recipient" name="recipient" autocomplete="name" required>
+            </div>
+            <div class="field full">
+              <label for="address">Address</label>
+              <input id="address" name="address" autocomplete="street-address" required>
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="city" autocomplete="address-level2" required>
+            </div>
+            <div class="field">
+              <label for="state">State</label>
+              <select id="state" name="state" autocomplete="address-level1" required>
+                <option value="">State</option>
+                <option>AL</option>
+                <option>AK</option>
+                <option>AS</option>
+                <option>AZ</option>
+                <option>AR</option>
+                <option>CA</option>
+                <option>CO</option>
+                <option>CT</option>
+                <option>DE</option>
+                <option>DC</option>
+                <option>FM</option>
+                <option>FL</option>
+                <option>GA</option>
+                <option>GU</option>
+                <option>HI</option>
+                <option>ID</option>
+                <option>IL</option>
+                <option>IN</option>
+                <option>IA</option>
+                <option>KS</option>
+                <option>KY</option>
+                <option>LA</option>
+                <option>ME</option>
+                <option>MH</option>
+                <option>MD</option>
+                <option>MA</option>
+                <option>MI</option>
+                <option>MN</option>
+                <option>MS</option>
+                <option>MO</option>
+                <option>MP</option>
+                <option>MT</option>
+                <option>NE</option>
+                <option>NV</option>
+                <option>NH</option>
+                <option>NJ</option>
+                <option>NM</option>
+                <option>NY</option>
+                <option>NC</option>
+                <option>ND</option>
+                <option>OH</option>
+                <option>OK</option>
+                <option>OR</option>
+                <option>PW</option>
+                <option>PA</option>
+                <option>PR</option>
+                <option>RI</option>
+                <option>SC</option>
+                <option>SD</option>
+                <option>TN</option>
+                <option>TX</option>
+                <option>UT</option>
+                <option>VT</option>
+                <option>VI</option>
+                <option>VA</option>
+                <option>WA</option>
+                <option>WV</option>
+                <option>WI</option>
+                <option>WY</option>
+                <option>AA</option>
+                <option>AE</option>
+                <option>AP</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="zip">ZIP</label>
+              <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" required>
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <button class="btn primary full" type="submit">Preview Postcard</button>
+            </div>
+          </form>
+          <aside class="postcard back" aria-label="Back preview">
+            <div class="message-text" data-preview-message></div>
+            <div class="postcard-divider"></div>
+            <div>
+              <div class="stamp"></div>
+              <div class="address-lines">
+                <strong data-preview-recipient></strong>
+                <div class="address-text" data-preview-address></div>
+                <div class="address-line"></div>
+                <div class="address-line"></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a data-nav="home" href="index.html">Home</a>
+      <a data-nav="create" href="create.html">Create</a>
+      <a data-nav="orders" href="orders.html">Orders</a>
+      <a data-nav="me" href="login.html">Me</a>
+    </nav>
+    <script type="module" src="js/message.js"></script>
+  </body>
+</html>

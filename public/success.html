@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Success | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="app-shell" data-page="orders">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="create.html">Create</a>
+          <a class="active" href="orders.html">Orders</a>
+          <a href="login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="success-panel">
+        <div class="success-mark">OK</div>
+        <h1>Your postcard is on its way.</h1>
+        <p>Order Number: <strong data-order-id>WYWH-ABC123</strong></p>
+        <p>Status: <strong class="queued" data-order-status>Queued for Printing</strong></p>
+        <div class="button-row" style="justify-content: center;">
+          <a class="btn primary" href="orders.html">Track Status</a>
+          <a class="btn secondary" href="create.html">Send Another</a>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a data-nav="home" href="index.html">Home</a>
+      <a data-nav="create" href="create.html">Create</a>
+      <a data-nav="orders" href="orders.html">Orders</a>
+      <a data-nav="me" href="login.html">Me</a>
+    </nav>
+    <script type="module" src="js/success.js"></script>
+  </body>
+</html>

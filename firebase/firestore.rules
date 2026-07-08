@@ -1,0 +1,106 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function organization(orgId) {
+      return get(/databases/$(database)/documents/organizations/$(orgId));
+    }
+
+    function isOrgMember(orgId) {
+      return signedIn()
+        && request.auth.uid in organization(orgId).data.memberIds;
+    }
+
+    function isOrgOwner(orgId) {
+      return signedIn()
+        && organization(orgId).data.ownerId == request.auth.uid;
+    }
+
+    function belongsToMemberOrg() {
+      return isOrgMember(resource.data.organizationId);
+    }
+
+    function newDocBelongsToMemberOrg() {
+      return isOrgMember(request.resource.data.organizationId);
+    }
+
+    match /users/{userId} {
+      allow create: if isSelf(userId);
+      allow read, update: if isSelf(userId);
+      allow delete: if false;
+    }
+
+    match /organizations/{organizationId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.auth.uid in request.resource.data.memberIds;
+      allow read: if isOrgMember(organizationId);
+      allow update: if isOrgOwner(organizationId);
+      allow delete: if false;
+    }
+
+    match /journeys/{journeyId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.createdBy == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update, delete: if belongsToMemberOrg()
+        && resource.data.createdBy == request.auth.uid;
+    }
+
+    match /memories/{memoryId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.authorId == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update, delete: if belongsToMemberOrg()
+        && resource.data.authorId == request.auth.uid;
+    }
+
+    match /media/{mediaId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.uploadedBy == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update, delete: if belongsToMemberOrg()
+        && resource.data.uploadedBy == request.auth.uid;
+    }
+
+    match /albums/{albumId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.createdBy == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update, delete: if belongsToMemberOrg()
+        && resource.data.createdBy == request.auth.uid;
+    }
+
+    match /comments/{commentId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.authorId == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update, delete: if belongsToMemberOrg()
+        && resource.data.authorId == request.auth.uid;
+    }
+
+    match /notifications/{notificationId} {
+      allow create: if false;
+      allow read, update: if signedIn()
+        && resource.data.userId == request.auth.uid;
+      allow delete: if false;
+    }
+
+    match /invitations/{invitationId} {
+      allow create: if newDocBelongsToMemberOrg()
+        && request.resource.data.invitedBy == request.auth.uid;
+      allow read: if belongsToMemberOrg();
+      allow update: if belongsToMemberOrg();
+      allow delete: if false;
+    }
+  }
+}
+

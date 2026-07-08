@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="app-shell" data-page="me">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="create.html">Create</a>
+          <a href="orders.html">Orders</a>
+          <a class="active" href="login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="auth-layout">
+        <div class="auth-art"><img src="images/postcard-hero.png" alt=""></div>
+        <section class="auth-panel">
+          <h1>Welcome back.</h1>
+          <p>Sign in to send and track postcards.</p>
+          <form id="authForm" class="field-grid">
+            <div class="field full">
+              <label for="email">Email</label>
+              <input id="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field full">
+              <label for="password">Password</label>
+              <input id="password" type="password" autocomplete="current-password" required>
+            </div>
+            <div class="field full">
+              <button class="btn primary full" type="submit">Login</button>
+            </div>
+            <div class="field full">
+              <button class="btn secondary full" type="button">Continue with Google</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a data-nav="home" href="index.html">Home</a>
+      <a data-nav="create" href="create.html">Create</a>
+      <a data-nav="orders" href="orders.html">Orders</a>
+      <a data-nav="me" href="login.html">Me</a>
+    </nav>
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>
