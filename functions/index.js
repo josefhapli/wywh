@@ -17,6 +17,13 @@ const stripeWebhookSecret = defineSecret("STRIPE_WEBHOOK_SECRET");
 const POSTCARD_PRICE_CENTS = 299;
 const BETA_PROMO_CODE = "TEST2026";
 const WEB_APP_URL = "https://etherstudios.net/projects/wywh";
+const FIREBASE_WEB_APP_URL = "https://wish-you-were-here-dev.web.app";
+const FIREBASE_APP_URL = "https://wish-you-were-here-dev.firebaseapp.com";
+const CHECKOUT_ORIGINS = [
+  "https://etherstudios.net",
+  FIREBASE_WEB_APP_URL,
+  FIREBASE_APP_URL,
+];
 const OPERATOR_EMAIL = "josef.hapli@gmail.com";
 
 function getStripe() {
@@ -56,6 +63,15 @@ function getOrderDraft(data) {
 
 function createOrderId() {
   return `WYWH-${randomBytes(4).toString("hex").toUpperCase()}`;
+}
+
+function checkoutAppUrl(request) {
+  const origin = request.rawRequest?.get("origin");
+  if (origin === FIREBASE_WEB_APP_URL || origin === FIREBASE_APP_URL) {
+    return origin;
+  }
+
+  return WEB_APP_URL;
 }
 
 function assertOperator(request) {
@@ -107,7 +123,7 @@ function orderData(orderId, draft, pricing, paymentStatus) {
 }
 
 exports.createCheckout = onCall(
-  {cors: ["https://etherstudios.net"], secrets: [stripeSecretKey]},
+  {cors: CHECKOUT_ORIGINS, secrets: [stripeSecretKey]},
   async (request) => {
     const draft = getOrderDraft(request.data?.draft);
     const promoCode = typeof request.data?.promoCode === "string"
@@ -116,6 +132,7 @@ exports.createCheckout = onCall(
     const pricing = pricingFor(promoCode);
     const orderId = createOrderId();
     const orderRef = db.collection("orders").doc(orderId);
+    const appUrl = checkoutAppUrl(request);
 
     if (pricing.totalCents === 0) {
       await orderRef.create(orderData(orderId, draft, pricing, "comped"));
@@ -138,8 +155,8 @@ exports.createCheckout = onCall(
           quantity: 1,
         }],
         metadata: {orderId},
-        success_url: `${WEB_APP_URL}/success.html?order_id=${encodeURIComponent(orderId)}&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${WEB_APP_URL}/checkout.html?order_id=${encodeURIComponent(orderId)}`,
+        success_url: `${appUrl}/success.html?order_id=${encodeURIComponent(orderId)}&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${appUrl}/checkout.html?order_id=${encodeURIComponent(orderId)}`,
         submit_type: "pay",
       });
 
