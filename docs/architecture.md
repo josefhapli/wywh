@@ -1,5 +1,37 @@
 # Wish You Were Here Architecture
 
+Wish You Were Here
+
+Mission
+Making memories matter.
+
+MVP
+One person.
+One postcard.
+One smile.
+
+Domain Model
+
+User
+  ↓
+Memory
+  ↓
+Keepsake
+  ↓
+Order
+
+Guiding Principle
+
+The user experiences one action.
+The system performs many.
+
+Every feature should answer:
+
+Does this help one person
+send one postcard
+to one person
+to create one smile?
+
 ## Product Shape
 
 Wish You Were Here is a memory-sharing and postcard app. The near-term product lets a user upload a photo, write a message, enter a recipient address, pay, and create a print-ready order. The broader architecture also supports organizations, journeys, memories, albums, comments, notifications, and invitations.

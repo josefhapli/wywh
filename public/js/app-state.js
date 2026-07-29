@@ -30,20 +30,39 @@ export function clearDraft() {
   localStorage.removeItem(STORAGE_KEY);
 }
 
-export function createOrder() {
+export function buildOrder({ id, status = "Queued for Printing" } = {}) {
   const draft = getDraft();
-  const order = {
-    id: `WYWH-${Math.floor(100000 + Math.random() * 900000)}`,
+  return {
+    id: id || `WYWH-${Math.floor(100000 + Math.random() * 900000)}`,
     createdAt: new Date().toISOString(),
-    status: "Queued for Printing",
+    status,
     statusClass: "queued",
     image: draft.image,
     recipient: draft.recipient || "Recipient"
   };
+}
+
+export function saveOrder(order) {
   const orders = [order, ...getOrders()];
   localStorage.setItem(ORDERS_KEY, JSON.stringify(orders.slice(0, 12)));
   sessionStorage.setItem("wywh.lastOrder", JSON.stringify(order));
   return order;
+}
+
+export function validateDraft(draft = getDraft()) {
+  const requiredFields = [
+    ["image", "a photo"],
+    ["message", "a message"],
+    ["recipient", "the recipient's name"],
+    ["address", "a street address"],
+    ["city", "a city"],
+    ["state", "a state"],
+    ["zip", "a ZIP code"]
+  ];
+
+  return requiredFields
+    .filter(([field]) => typeof draft[field] !== "string" || !draft[field].trim())
+    .map(([, label]) => label);
 }
 
 export function getLastOrder() {

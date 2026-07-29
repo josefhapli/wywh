@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Checkout | Wish You Were Here</title>
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.css?v=20260729">
   </head>
   <body class="app-shell" data-page="create">
     <header class="site-header">
@@ -24,18 +24,27 @@
         <div class="page-heading">
           <div>
             <h1>Checkout</h1>
-            <p>This MVP simulates payment and creates a queued print order.</p>
+            <p>Confirm your postcard, then place your order for the validation test.</p>
           </div>
         </div>
         <div class="workspace">
           <article class="postcard front"><img data-preview-image alt="Postcard front"></article>
           <aside class="summary">
             <h2>Order Summary</h2>
-            <div class="summary-row"><span>1 Postcard</span><strong>$2.99</strong></div>
+            <div class="summary-row"><span>1 Postcard</span><strong data-subtotal>$2.99</strong></div>
             <div class="summary-row"><span>Shipping</span><strong>Included</strong></div>
-            <div class="summary-row total"><span>Total</span><span>$2.99</span></div>
-            <button class="btn primary full" id="checkout" type="button">Pay Now</button>
-            <p class="notice">Stripe can replace this simulated button when the backend is ready.</p>
+            <div class="summary-row" data-discount-row hidden><span>Promo discount</span><strong data-discount>-$0.00</strong></div>
+            <div class="summary-row total"><span>Total</span><span data-total>$2.99</span></div>
+            <div class="promo-entry">
+              <label for="promoCode">Promo code</label>
+              <div class="promo-controls">
+                <input id="promoCode" autocomplete="off" autocapitalize="characters" placeholder="Enter code">
+                <button class="btn secondary" id="applyPromo" type="button">Apply</button>
+              </div>
+              <p class="notice" id="promoNotice" aria-live="polite"></p>
+            </div>
+            <button class="btn primary full" id="checkout" type="button">Continue to Secure Payment</button>
+            <p class="notice" id="checkoutNotice" aria-live="polite">You'll enter your card details securely on Stripe.</p>
           </aside>
         </div>
       </div>

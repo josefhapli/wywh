@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fulfillment | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css?v=20260729">
+  </head>
+  <body class="app-shell fulfillment-page">
+    <header class="site-header no-print">
+      <div class="header-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <span class="operator-label">Private fulfillment</span>
+      </div>
+    </header>
+
+    <main class="container fulfillment-main">
+      <section class="fulfillment-gate" data-gate>
+        <p class="eyebrow">OPERATOR ACCESS</p>
+        <h1>Fulfill postcards.</h1>
+        <p>Sign in with the approved WYWH operator account to view paid orders and print them.</p>
+        <button class="btn primary" type="button" data-sign-in>Continue with Google</button>
+        <p class="fulfillment-notice" data-gate-notice aria-live="polite"></p>
+      </section>
+
+      <section class="fulfillment-dashboard" data-dashboard hidden>
+        <div class="page-heading no-print">
+          <div>
+            <p class="eyebrow">OPERATOR ACCESS</p>
+            <h1>Paid orders</h1>
+            <p data-operator-email></p>
+          </div>
+          <button class="btn secondary" type="button" data-sign-out>Sign out</button>
+        </div>
+
+        <div class="fulfillment-layout">
+          <section class="fulfillment-orders no-print" aria-label="Paid orders">
+            <div data-orders-list class="orders-list"></div>
+          </section>
+
+          <section class="fulfillment-detail" data-order-detail hidden>
+            <div class="fulfillment-detail-heading no-print">
+              <div>
+                <p class="eyebrow">READY TO PRINT</p>
+                <h2 data-selected-order-id></h2>
+              </div>
+              <div class="button-row">
+                <button class="btn primary" type="button" data-print-side="front">Print front</button>
+                <button class="btn secondary" type="button" data-print-side="back">Print back</button>
+              </div>
+            </div>
+            <p class="print-help no-print">Use 4 × 6 in, landscape, and actual size. Print the front, reinsert the same sheet, then print the back. Test the feed direction on plain paper first.</p>
+
+            <article class="fulfillment-postcard fulfillment-postcard-front" data-print-card="front">
+              <img data-order-image alt="Postcard front">
+              <svg class="fulfillment-qr" data-qr-code role="img" aria-label="Scan to visit Wish You Were Here"></svg>
+            </article>
+            <article class="fulfillment-postcard fulfillment-postcard-back" data-print-card="back">
+              <div class="fulfillment-message-side">
+                <div data-order-message class="fulfillment-message"></div>
+                <div class="fulfillment-signoff">---<br>#WishYouWereHere</div>
+              </div>
+              <div class="fulfillment-divider"></div>
+              <div class="fulfillment-address-side">
+                <div class="fulfillment-stamp">PLACE<br>STAMP<br>HERE</div>
+                <div class="fulfillment-address">
+                  <strong data-order-recipient></strong>
+                  <div data-order-address class="address-text"></div>
+                </div>
+              </div>
+            </article>
+
+            <div class="button-row fulfillment-status-actions no-print">
+              <button class="btn secondary" type="button" data-status="printing">Mark printing</button>
+              <button class="btn primary" type="button" data-status="mailed">Mark mailed</button>
+              <p data-detail-notice class="fulfillment-notice" aria-live="polite"></p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="js/fulfillment.js"></script>
+  </body>
+</html>

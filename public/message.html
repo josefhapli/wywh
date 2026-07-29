@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Message | Wish You Were Here</title>
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.css?v=20260729">
   </head>
   <body class="app-shell" data-page="create">
     <header class="site-header">
@@ -30,8 +30,11 @@
         <div class="workspace">
           <form id="messageForm" class="form-panel field-grid">
             <div class="field full">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" maxlength="500" placeholder="Wish you were here..."></textarea>
+              <div class="field-label-row">
+                <label for="message">Message</label>
+                <span class="character-count" data-character-count>0 / 350</span>
+              </div>
+              <textarea id="message" name="message" maxlength="350" placeholder="Wish you were here..." required></textarea>
             </div>
             <div class="field full">
               <label for="recipient">Recipient Name</label>
@@ -123,7 +126,10 @@
             </div>
           </form>
           <aside class="postcard back" aria-label="Back preview">
-            <div class="message-text" data-preview-message></div>
+            <div class="postcard-message-side">
+              <div class="message-text" data-preview-message></div>
+              <div class="postcard-signoff">---<br>#WishYouWereHere</div>
+            </div>
             <div class="postcard-divider"></div>
             <div>
               <div class="stamp"></div>

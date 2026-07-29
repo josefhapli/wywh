@@ -1,5 +1,29 @@
 # Data Model
 
+Users & Collaboration
+---------------------
+User
+Organization
+Invitation
+Notification
+
+Content
+-------
+Journey
+Memory
+Media
+Album
+Comment
+
+Commerce
+--------
+Keepsake
+Order
+Product
+Template
+Promotion
+Recipient
+
 ## User
 
 Represents a Firebase Auth user profile.
@@ -46,7 +70,11 @@ Key fields:
 
 ## Memory
 
-Represents a story, moment, or postcard source.
+Represents a meaningful moment captured by a user.
+
+A Memory is the canonical source of content within WYWH.
+It may be transformed into one or more Keepsakes but is never tied to a
+specific product or order.
 
 Key fields:
 
@@ -59,6 +87,80 @@ Key fields:
 - `location`
 - `mediaIds`
 - `status`
+- `createdAt`
+- `updatedAt`
+
+## Keepsake
+
+Represents a designed presentation of a Memory.
+
+A Keepsake references a Memory and stores all product-specific
+layout and design information.
+
+A single Memory may have multiple Keepsakes.
+
+Key fields:
+
+- `id`
+- `memoryId`
+- `ownerId`
+- `productId`
+- `templateId`
+- `layoutData`
+- `cropData`
+- `status`
+- `createdAt`
+- `updatedAt`
+
+## Recipient
+
+Represents a person who can receive one or more Keepsakes.
+
+Each recipient belongs to one authenticated sender. An order stores an address
+snapshot so a later address-book edit cannot change an order already placed.
+
+Key fields:
+
+- `id`
+- `ownerId`
+- `displayName`
+- `email`
+- `phone`
+- `address.line1`
+- `address.line2`
+- `address.city`
+- `address.region`
+- `address.postalCode`
+- `address.country`
+- `addressSource` (`manual`, `request`, or `contact-picker`)
+- `addressVerifiedAt`
+- `favorite`
+- `createdAt`
+- `updatedAt`
+
+The private address-request MVP may initially populate only the active draft.
+Saving the confirmed address as a reusable Recipient is a v2 enhancement and
+requires sender authentication plus clear recipient consent.
+
+## Order
+
+Represents the purchase and fulfillment of a Keepsake.
+
+Key fields:
+
+- `id`
+- `ownerId`
+- `keepsakeId`
+- `recipientId`
+- `recipientSnapshot`
+- `promotionId`
+- `subtotal`
+- `shipping`
+- `tax`
+- `total`
+- `paymentStatus`
+- `fulfillmentStatus`
+- `trackingNumber`
 - `createdAt`
 - `updatedAt`
 
@@ -143,4 +245,3 @@ Key fields:
 - `token`
 - `expiresAt`
 - `createdAt`
-

@@ -32,7 +32,9 @@ export async function createOrderRecord(draft) {
     keepsake: {
       type: "postcard",
       quantity: 1
-    }
+    },
+
+    pricing: draft.pricing
 
   });
 }
