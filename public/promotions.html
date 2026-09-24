@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/WYWH-icon-color.png">
+    <title>Promotions | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css?v=20260816-promotions">
+  </head>
+  <body class="app-shell fulfillment-page">
+    <header class="site-header"><div class="header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="images/WYWH-logo-color-transparent.png" alt="Wish You Were Here"></a><span class="operator-label">Private promotions</span></div></header>
+    <main class="container fulfillment-main">
+      <section class="fulfillment-gate" data-gate>
+        <p class="eyebrow">OPERATOR ACCESS</p><h1>Manage promotions.</h1>
+        <p>Sign in with the approved WYWH operator account.</p>
+        <button class="btn primary" type="button" data-sign-in>Continue with Google</button>
+        <p class="fulfillment-notice" data-notice aria-live="polite"></p>
+      </section>
+      <section data-dashboard hidden>
+        <div class="page-heading"><div><p class="eyebrow">OPERATOR ACCESS</p><h1>Promotions</h1><p data-operator-email></p></div><div class="button-row"><a class="btn secondary" href="fulfillment.html">Fulfillment</a><button class="btn secondary" type="button" data-sign-out>Sign out</button></div></div>
+        <div class="promotion-layout">
+          <form class="promotion-form field-grid" data-promotion-form>
+            <h2 data-form-title>New promotion</h2>
+            <div class="field full"><label for="promotionCode">Code</label><input id="promotionCode" maxlength="32" required placeholder="SUMMER25"></div>
+            <div class="field"><label for="discountType">Discount type</label><select id="discountType"><option value="percentage">Percentage</option><option value="fixed">Fixed amount (cents)</option></select></div>
+            <div class="field"><label for="discountValue">Discount value</label><input id="discountValue" type="number" min="1" step="1" required></div>
+            <div class="field"><label for="startsAt">Starts</label><input id="startsAt" type="datetime-local" required></div>
+            <div class="field"><label for="endsAt">Ends (optional)</label><input id="endsAt" type="datetime-local"></div>
+            <div class="field"><label for="redemptionLimit">Redemption limit (optional)</label><input id="redemptionLimit" type="number" min="1" step="1"></div>
+            <label class="promotion-active"><input id="promotionActive" type="checkbox" checked> Active</label>
+            <div class="field full button-row"><button class="btn primary" type="submit">Save promotion</button><button class="btn secondary" type="button" data-reset>Clear</button></div>
+            <p class="fulfillment-notice field full" data-form-notice aria-live="polite"></p>
+          </form>
+          <section><h2>All promotions</h2><div class="promotion-list" data-promotion-list></div></section>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="js/promotions.js"></script>
+  </body>
+</html>

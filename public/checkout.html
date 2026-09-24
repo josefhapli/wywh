@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/WYWH-icon-color.png">
     <title>Checkout | Wish You Were Here</title>
-    <link rel="stylesheet" href="css/app.css?v=20260729">
+    <link rel="stylesheet" href="css/app.css?v=20260731-white-header">
   </head>
   <body class="app-shell" data-page="create">
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <a class="brand" href="index.html" aria-label="Wish You Were Here home"><img class="brand-logo" src="images/WYWH-logo-color-transparent.png" alt=""></a>
         <nav class="nav-links" aria-label="Primary">
           <a href="index.html">Home</a>
           <a class="active" href="create.html">Create</a>
@@ -24,12 +25,49 @@
         <div class="page-heading">
           <div>
             <h1>Checkout</h1>
-            <p>Confirm your postcard, then place your order for the validation test.</p>
+            <p>Confirm both sides of your postcard, then continue to secure payment.</p>
           </div>
+          <a class="btn secondary" href="message.html">Edit postcard</a>
         </div>
         <div class="workspace">
-          <article class="postcard front"><img data-preview-image alt="Postcard front"></article>
+          <section class="postcard-grid">
+            <div class="postcard-preview">
+              <h2 class="postcard-side-label">Front</h2>
+              <article class="postcard front"><img data-preview-image alt="Front of postcard"></article>
+            </div>
+            <div class="postcard-preview">
+              <h2 class="postcard-side-label">Back</h2>
+              <article class="postcard back">
+                <div class="postcard-body">
+                  <div class="postcard-message-side">
+                    <div class="postcard-return-address" data-preview-return>From: Billing address added after payment</div>
+                    <div class="message-text" data-preview-message></div>
+                    <div class="postcard-signoff">Sent with Wish You Were Here<br>etherstudios.net/projects/wywh</div>
+                  </div>
+                  <div class="postcard-divider"></div>
+                  <div class="postcard-address-side">
+                    <div class="stamp"></div>
+                    <div class="address-lines"><strong data-preview-recipient></strong><div class="address-text" data-preview-address></div></div>
+                  </div>
+                </div>
+                <div class="postcard-postal-band" aria-label="Reserved postal barcode area"></div>
+              </article>
+            </div>
+          </section>
           <aside class="summary">
+            <section class="sender-details">
+              <h2>From</h2>
+              <p class="privacy-note compact">Your return address will print subtly on the postcard.</p>
+              <div class="field"><label for="senderName">Sender name</label><input id="senderName" autocomplete="name" required></div>
+              <label class="return-address-toggle"><input id="differentReturnAddress" type="checkbox"> Is your return mailing address different from your billing address?</label>
+              <div class="field-grid return-address-fields" data-return-fields hidden>
+                <div class="field full"><label for="returnAddress">Street address</label><input id="returnAddress" autocomplete="address-line1"></div>
+                <div class="field full"><label for="returnAddress2">Apartment, suite, etc. (optional)</label><input id="returnAddress2" autocomplete="address-line2"></div>
+                <div class="field"><label for="returnCity">City</label><input id="returnCity" autocomplete="address-level2"></div>
+                <div class="field"><label for="returnState">State</label><input id="returnState" autocomplete="address-level1"></div>
+                <div class="field"><label for="returnZip">ZIP code</label><input id="returnZip" autocomplete="postal-code"></div>
+              </div>
+            </section>
             <h2>Order Summary</h2>
             <div class="summary-row"><span>1 Postcard</span><strong data-subtotal>$2.99</strong></div>
             <div class="summary-row"><span>Shipping</span><strong>Included</strong></div>
@@ -50,12 +88,13 @@
       </div>
     </main>
 
+    <footer class="site-footer"><div class="container footer-inner"><span>&copy; 2026 Wish You Were Here, made with love <span class="footer-heart" aria-label="love">♥</span> by EtherStudios.</span><a href="terms.html">Terms &amp; Conditions</a></div></footer>
     <nav class="mobile-nav" aria-label="Mobile">
       <a data-nav="home" href="index.html">Home</a>
       <a data-nav="create" href="create.html">Create</a>
       <a data-nav="orders" href="orders.html">Orders</a>
       <a data-nav="me" href="login.html">Me</a>
     </nav>
-    <script type="module" src="js/checkout.js"></script>
+    <script type="module" src="js/checkout.js?v=20260921-save-draft-fix"></script>
   </body>
 </html>

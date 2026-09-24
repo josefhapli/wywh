@@ -12,6 +12,47 @@ albums/{albumId}
 comments/{commentId}
 notifications/{notificationId}
 invitations/{invitationId}
+promotions/{normalizedCode}
+orders/{orderId}
+```
+
+## promotions
+
+```js
+{
+  code: "SUMMER25",
+  discountType: "percentage",
+  discountValue: 25,
+  startsAt: Timestamp,
+  endsAt: Timestamp | null,
+  redemptionLimit: 100 | null,
+  redemptionCount: 0,
+  reservationCount: 0,
+  active: true,
+  createdAt: Timestamp,
+  updatedAt: Timestamp
+}
+```
+
+## orders
+
+```js
+{
+  orderId: "WYWH-1234ABCD",
+  status: "queued",
+  paymentStatus: "paid",
+  fulfillmentStatus: "queued",
+  recipient: {name, address, city, state, zip},
+  sender: {
+    name: "Jordan Stone",
+    returnAddressSource: "billing",
+    returnAddress: {address, address2, city, state, zip, country}
+  },
+  memory: {message, image, imageOrientation, imageSourceWidth, imageSourceHeight},
+  pricing: {subtotalCents, discountCents, totalCents, currency, promotionId},
+  createdAt: Timestamp,
+  updatedAt: Timestamp
+}
 ```
 
 ## users
@@ -154,4 +195,3 @@ invitations/{invitationId}
   createdAt: Timestamp
 }
 ```
-

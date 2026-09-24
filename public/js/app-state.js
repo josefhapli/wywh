@@ -5,6 +5,9 @@ const DEFAULT_IMAGE = "images/postcard-hero.png";
 export function getDraft() {
   const fallback = {
     image: DEFAULT_IMAGE,
+    imageOrientation: "landscape",
+    imageSourceWidth: null,
+    imageSourceHeight: null,
     message: "Wish you were here.",
     recipient: "",
     address: "",
@@ -38,6 +41,7 @@ export function buildOrder({ id, status = "Queued for Printing" } = {}) {
     status,
     statusClass: "queued",
     image: draft.image,
+    imageOrientation: draft.imageOrientation,
     recipient: draft.recipient || "Recipient"
   };
 }
@@ -105,6 +109,7 @@ export function renderDraftPreview(root, draft = getDraft()) {
   if (!root) return;
   root.querySelectorAll("[data-preview-image]").forEach((img) => {
     img.src = draft.image || DEFAULT_IMAGE;
+    img.dataset.imageOrientation = draft.imageOrientation || "landscape";
   });
   root.querySelectorAll("[data-preview-message]").forEach((el) => {
     el.textContent = draft.message || "Wish you were here.";
@@ -113,7 +118,8 @@ export function renderDraftPreview(root, draft = getDraft()) {
     el.textContent = draft.recipient || "Recipient Name";
   });
   root.querySelectorAll("[data-preview-address]").forEach((el) => {
-    const cityLine = [draft.city, draft.state, draft.zip].filter(Boolean).join(", ");
+    const locality = [draft.city, draft.state].filter(Boolean).join(", ");
+    const cityLine = [locality, draft.zip].filter(Boolean).join(" ");
     el.textContent = [draft.address, cityLine].filter(Boolean).join("\n") || "Street Address\nCity, State ZIP";
   });
 }

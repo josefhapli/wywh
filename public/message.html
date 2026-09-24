@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/WYWH-icon-color.png">
     <title>Message | Wish You Were Here</title>
-    <link rel="stylesheet" href="css/app.css?v=20260729">
+    <link rel="stylesheet" href="css/app.css?v=20260731-white-header">
   </head>
   <body class="app-shell" data-page="create">
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <a class="brand" href="index.html" aria-label="Wish You Were Here home"><img class="brand-logo" src="images/WYWH-logo-color-transparent.png" alt=""></a>
         <nav class="nav-links" aria-label="Primary">
           <a href="index.html">Home</a>
           <a class="active" href="create.html">Create</a>
@@ -24,7 +25,7 @@
         <div class="page-heading">
           <div>
             <h1>Address and message</h1>
-            <p>Make it feel like a real postcard: short, personal, and easy to send.</p>
+            <p>Write a personal note and tell us where to send your postcard.</p>
           </div>
         </div>
         <div class="workspace">
@@ -41,7 +42,7 @@
               <input id="recipient" name="recipient" autocomplete="name" required>
             </div>
             <div class="field full">
-              <label for="address">Address</label>
+              <label for="address">Recipient Mailing Address</label>
               <input id="address" name="address" autocomplete="street-address" required>
             </div>
             <div class="field">
@@ -120,8 +121,48 @@
               <label for="zip">ZIP</label>
               <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" required>
             </div>
-            <div class="field">
-              <label>&nbsp;</label>
+            <div class="field full address-request-action">
+              <button class="btn secondary full" type="button" data-address-request-open>I don't have their address</button>
+            </div>
+            <section class="address-request-panel field full" aria-label="Request their mailing address" data-address-request-panel hidden>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="requestSenderName">Your name</label>
+                  <input id="requestSenderName" autocomplete="name" maxlength="120">
+                </div>
+                <div class="field">
+                  <label for="requestRecipientEmail">Their email</label>
+                  <input id="requestRecipientEmail" type="email" autocomplete="email" maxlength="254">
+                </div>
+                <div class="field full">
+                  <label for="requestRecognitionNote">A note they'll recognize <span class="optional-label">Optional</span></label>
+                  <input id="requestRecognitionNote" maxlength="120" placeholder="For the postcard from our Cape May trip">
+                </div>
+              </div>
+              <div class="verification-options" data-verification-options>
+                <button class="btn google full" type="button" data-google-request>Continue with Google</button>
+                <div class="or-divider"><span>or verify by email</span></div>
+                <div class="field">
+                  <label for="requestSenderEmail">Your email</label>
+                  <div class="copy-row">
+                    <input id="requestSenderEmail" type="email" autocomplete="email" maxlength="254">
+                    <button class="btn secondary" type="button" data-send-code>Send code</button>
+                  </div>
+                </div>
+              </div>
+              <div class="verification-code" data-verification-code hidden>
+                <div class="field">
+                  <label for="requestCode">Verification code</label>
+                  <div class="copy-row">
+                    <input id="requestCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+                    <button class="btn primary" type="button" data-verify-request>Verify &amp; send request</button>
+                  </div>
+                </div>
+              </div>
+              <p class="privacy-note compact">We'll email them a private link. When they reply, we'll email you a secure link to finish this postcard on any device.</p>
+              <p class="form-notice" data-address-request-status aria-live="polite"></p>
+            </section>
+            <div class="field full">
               <button class="btn primary full" type="submit">Preview Postcard</button>
             </div>
           </form>
@@ -145,12 +186,13 @@
       </div>
     </main>
 
+    <footer class="site-footer"><div class="container footer-inner"><span>&copy; 2026 Wish You Were Here, made with love <span class="footer-heart" aria-label="love">♥</span> by EtherStudios.</span><a href="terms.html">Terms &amp; Conditions</a></div></footer>
     <nav class="mobile-nav" aria-label="Mobile">
       <a data-nav="home" href="index.html">Home</a>
       <a data-nav="create" href="create.html">Create</a>
       <a data-nav="orders" href="orders.html">Orders</a>
       <a data-nav="me" href="login.html">Me</a>
     </nav>
-    <script type="module" src="js/message.js"></script>
+    <script type="module" src="js/message.js?v=20260730-address-layout"></script>
   </body>
 </html>

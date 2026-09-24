@@ -128,7 +128,17 @@ function showOrder(order) {
   activeOrder = order;
   selectedOrderId.textContent = order.orderId;
   document.querySelector("[data-order-image]").src = order.memory.image;
+  document.querySelector("[data-order-image]").dataset.imageOrientation =
+    order.memory.imageOrientation || "landscape";
   document.querySelector("[data-order-message]").textContent = order.memory.message;
+  const returnAddress = order.sender?.returnAddress || {};
+  const returnLocality = [returnAddress.city, returnAddress.state].filter(Boolean).join(", ");
+  document.querySelector("[data-order-return-address]").textContent = [
+    `From: ${order.sender?.name || "Sender"}`,
+    returnAddress.address,
+    returnAddress.address2,
+    [returnLocality, returnAddress.zip].filter(Boolean).join(" ")
+  ].filter(Boolean).join("\n");
   document.querySelector("[data-order-recipient]").textContent = order.recipient.name;
   document.querySelector("[data-order-address]").textContent = [
     order.recipient.address,

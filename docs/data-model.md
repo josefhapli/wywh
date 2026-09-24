@@ -108,6 +108,9 @@ Key fields:
 - `templateId`
 - `layoutData`
 - `cropData`
+- `imageOrientation` (`landscape` or `portrait-clockwise`)
+- `imageSourceWidth`
+- `imageSourceHeight`
 - `status`
 - `createdAt`
 - `updatedAt`
@@ -138,9 +141,49 @@ Key fields:
 - `createdAt`
 - `updatedAt`
 
-The private address-request MVP may initially populate only the active draft.
-Saving the confirmed address as a reusable Recipient is a v2 enhancement and
-requires sender authentication plus clear recipient consent.
+The private address-request MVP restores a short-lived cloud draft into the
+sender's browser after the recipient replies. Saving
+the confirmed address as a reusable Recipient is a v2 enhancement and requires
+sender authentication plus clear recipient consent.
+
+## AddressRequest
+
+Represents a short-lived, single-use request for a recipient to provide the
+mailing address for the sender's active postcard draft.
+
+Key fields:
+
+- `id` (random request identifier)
+- `status` (`pending`, `completed`, or `claimed`)
+- `recipientName`
+- `recipientEmail`
+- `senderName`
+- `senderEmail` (verified by Google or a one-time email code)
+- `recognitionNote` (optional)
+- `draft` (temporary photo, message, and recipient name)
+- `appUrl` (the sender surface to resume)
+- `submitTokenHash` (removed when the recipient submits)
+- `claimTokenHash` (removed when the sender claims)
+- `address` (present only between submission and claim)
+- `createdAt`
+- `updatedAt`
+- `expiresAt`
+- `completedAt`
+- `claimedAt`
+
+WYWH emails the recipient a request ID plus submission secret. After submission,
+WYWH emails the verified sender a separate one-time claim secret. Raw secrets
+are never stored in Firestore. Browser access to the collection is denied; Cloud
+Functions validate the secrets and enforce one-time transitions. After the
+sender claims the completed request, the function returns the resumable draft
+and address, then deletes both private payloads and the remaining claim hash.
+
+## SenderEmailVerification
+
+Represents a short-lived email-code challenge for a sender who does not use
+Google sign-in. The document ID is a hash of the normalized email. It contains
+only hashed codes and proof tokens, enforces a resend delay and attempt limit,
+and can authorize one address request before expiring.
 
 ## Order
 
@@ -153,6 +196,9 @@ Key fields:
 - `keepsakeId`
 - `recipientId`
 - `recipientSnapshot`
+- `sender.name`
+- `sender.returnAddress`
+- `sender.returnAddressSource` (`billing` or `separate`)
 - `promotionId`
 - `subtotal`
 - `shipping`
@@ -163,6 +209,36 @@ Key fields:
 - `trackingNumber`
 - `createdAt`
 - `updatedAt`
+
+The sender and recipient snapshots are immutable fulfillment records. For a
+paid order that uses the billing address as its return address, the Stripe
+webhook writes the verified billing address into `sender.returnAddress`
+before the order enters the fulfillment queue. Fully discounted orders must
+provide a separate return address because they do not visit Stripe Checkout.
+
+## Promotion
+
+Represents an operator-managed discount that is always evaluated by Cloud
+Functions. The normalized code is also the Firestore document ID.
+
+Key fields:
+
+- `code`
+- `discountType` (`fixed` or `percentage`)
+- `discountValue` (cents for fixed discounts; whole percent otherwise)
+- `startsAt`
+- `endsAt` (optional)
+- `redemptionLimit` (optional)
+- `redemptionCount`
+- `reservationCount`
+- `active`
+- `createdAt`
+- `updatedAt`
+
+Paid promotional checkouts temporarily increment `reservationCount`. Successful
+payment atomically moves that slot to `redemptionCount`; Stripe expiration or
+scheduled cleanup releases it. Fully discounted orders increment
+`redemptionCount` immediately in the same transaction that creates the order.
 
 ## Media
 

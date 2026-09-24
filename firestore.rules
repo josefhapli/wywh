@@ -8,5 +8,15 @@ service cloud.firestore {
     match /orders/{orderId} {
       allow read, write: if false;
     }
+
+    // Address requests are accessed only through Cloud Functions, which keep
+    // both the submitted address and the sender's claim secret off the client.
+    match /addressRequests/{requestId} {
+      allow read, write: if false;
+    }
+
+    match /senderEmailVerifications/{verificationId} {
+      allow read, write: if false;
+    }
   }
 }

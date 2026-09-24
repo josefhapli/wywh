@@ -46,6 +46,15 @@
   //     ]
   //   },
   // ]
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "orders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "promotionReservationStatus", "order": "ASCENDING"},
+        {"fieldPath": "promotionReservationExpiresAt", "order": "ASCENDING"}
+      ]
+    }
+  ],
   "fieldOverrides": []
 }

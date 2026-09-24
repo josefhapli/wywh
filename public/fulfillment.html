@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/WYWH-icon-color.png">
     <title>Fulfillment | Wish You Were Here</title>
-    <link rel="stylesheet" href="css/app.css?v=20260729">
+    <link rel="stylesheet" href="css/app.css?v=20260731-white-header">
   </head>
   <body class="app-shell fulfillment-page">
     <header class="site-header no-print">
       <div class="header-inner">
-        <a class="brand" href="index.html"><span class="brand-mark">WY</span><span>Wish You Were Here</span></a>
+        <a class="brand" href="index.html" aria-label="Wish You Were Here home"><img class="brand-logo" src="images/WYWH-logo-color-transparent.png" alt=""></a>
         <span class="operator-label">Private fulfillment</span>
       </div>
     </header>
@@ -56,18 +57,19 @@
               <svg class="fulfillment-qr" data-qr-code role="img" aria-label="Scan to visit Wish You Were Here"></svg>
             </article>
             <article class="fulfillment-postcard fulfillment-postcard-back" data-print-card="back">
-              <div class="fulfillment-message-side">
-                <div data-order-message class="fulfillment-message"></div>
-                <div class="fulfillment-signoff">---<br>#WishYouWereHere</div>
-              </div>
-              <div class="fulfillment-divider"></div>
-              <div class="fulfillment-address-side">
-                <div class="fulfillment-stamp">PLACE<br>STAMP<br>HERE</div>
-                <div class="fulfillment-address">
-                  <strong data-order-recipient></strong>
-                  <div data-order-address class="address-text"></div>
+              <div class="fulfillment-postcard-body">
+                <div class="fulfillment-message-side">
+                  <div data-order-return-address class="fulfillment-return-address"></div>
+                  <div data-order-message class="fulfillment-message"></div>
+                  <div class="fulfillment-signoff">Sent with Wish You Were Here<br>etherstudios.net/projects/wywh</div>
+                </div>
+                <div class="fulfillment-divider"></div>
+                <div class="fulfillment-address-side">
+                  <div class="fulfillment-stamp">PLACE<br>STAMP<br>HERE</div>
+                  <div class="fulfillment-address"><strong data-order-recipient></strong><div data-order-address class="address-text"></div></div>
                 </div>
               </div>
+              <div class="fulfillment-postal-band" aria-label="Reserved postal barcode area"></div>
             </article>
 
             <div class="button-row fulfillment-status-actions no-print">

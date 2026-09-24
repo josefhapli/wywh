@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/WYWH-icon-color.png">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Share your mailing address | Wish You Were Here</title>
+    <link rel="stylesheet" href="css/app.css?v=20260731-white-header">
+  </head>
+  <body class="app-shell address-request-page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="Wish You Were Here home"><img class="brand-logo" src="images/WYWH-logo-color-transparent.png" alt=""></a>
+      </div>
+    </header>
+    <main class="app-main">
+      <div class="container narrow-container">
+        <section class="form-panel address-response-panel">
+          <span class="eyebrow">Private address request</span>
+          <h1 data-request-heading>Share your mailing address</h1>
+          <p data-request-intro>Your address will be used for one postcard and can be retrieved only by the person who sent you this link.</p>
+          <div class="request-trust" data-request-trust hidden>
+            <strong data-sender-identity></strong>
+            <p data-recognition-note hidden></p>
+          </div>
+          <form id="addressResponseForm" class="field-grid" hidden>
+            <div class="field full">
+              <label for="name">Full name</label>
+              <input id="name" name="name" autocomplete="name" maxlength="120" required>
+            </div>
+            <div class="field full">
+              <label for="address">Street address</label>
+              <input id="address" name="address" autocomplete="street-address" maxlength="200" required>
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="city" autocomplete="address-level2" maxlength="100" required>
+            </div>
+            <div class="field">
+              <label for="state">State or region</label>
+              <input id="state" name="state" autocomplete="address-level1" maxlength="50" required>
+            </div>
+            <div class="field">
+              <label for="zip">ZIP or postal code</label>
+              <input id="zip" name="zip" autocomplete="postal-code" maxlength="20" required>
+            </div>
+            <div class="field submit-field">
+              <label>&nbsp;</label>
+              <button class="btn primary full" type="submit">Share address privately</button>
+            </div>
+          </form>
+          <p class="form-notice" data-response-status aria-live="polite">Checking this private link...</p>
+          <p class="privacy-note">The link works once and expires after 7 days. Your address is deleted from the request after the sender retrieves it.</p>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer"><div class="container footer-inner"><span>&copy; 2026 Wish You Were Here, made with love <span class="footer-heart" aria-label="love">♥</span> by EtherStudios.</span><a href="terms.html">Terms &amp; Conditions</a></div></footer>
+    <script type="module" src="js/address-response.js?v=20260730-email-request"></script>
+  </body>
+</html>
